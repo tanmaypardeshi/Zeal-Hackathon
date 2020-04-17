@@ -9,7 +9,7 @@ from flask_cors import cross_origin
 @cross_origin()
 def addcontent():
     post_data = request.get_json()
-    new_content = Textfile(content=post_data['content'])
+    new_content = Textfile(content=post_data)
     db.session.add(new_content)
     db.session.commit()
     return 'Done', 201
