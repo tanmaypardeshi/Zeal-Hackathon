@@ -8,7 +8,6 @@
 * If pipenv is not installed: Run **pip3 install pipenv**
 * If pip is not installed: Run **sudo apt install python3-pip**
 * Use postman to test the api
-<<<<<<< HEAD
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
