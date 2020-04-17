@@ -1,6 +1,6 @@
 # Basic React and Flask integration
 
-### Steps to run flask:
+## Steps to run flask:
 1. Open the project folder and run **pipenv shell** to activate pipenv
 2. Install dependencies using **pipenv install**
 3. Run the command **python run.py** to run the api
@@ -14,7 +14,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+### `npm i`
+
+Run this first!
+Installs all dependencies from package.json
 
 ### `npm start`
 
