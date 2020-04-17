@@ -35,7 +35,7 @@ export const FileForm = ({onNewFile}) => {
                 className="btn btn-info btn-block"
                 onClick={async () => {
                     
-                    const response = await fetch("/addcontent", {   
+                    const response = await fetch("http://localhost:5000/addcontent", {
                         method: "POST",
                         headers: { "Content-Type" : "application/json" },
                         body: JSON.stringify(text)

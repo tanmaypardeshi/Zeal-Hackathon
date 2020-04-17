@@ -14,7 +14,7 @@ function App() {
   const [dark, setDarkState] = useState(false);
 
   useEffect(() => {
-    fetch("/showresult").then(response => response.json().then(data => {setSummary(data.content);})
+    fetch("http://localhost:5000/showresult").then(response => response.json().then(data => {setSummary(data.content);})
     );
   }, []);
 

@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -24,6 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
-=======
-.idea
->>>>>>> a66e65cee92b71d86e93ff1a32d0777cd47b2ee2
+apis/__pycache__
