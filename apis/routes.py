@@ -18,7 +18,6 @@ def addcontent():
         db.session.add(new_content)
         db.session.commit()
         session['title'] = title
-        print(session['title'])
         return {'success': 'Done'}
 
     elif title == check_unique.title:
