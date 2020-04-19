@@ -1,32 +1,23 @@
-from flask import jsonify, request, session
-from apis import app, db
-from .models import Textfile
+from flask import jsonify, request
+from apis import app
 from flask_cors import cross_origin
 
 
-# for the Post method
-@app.route("/addcontent", methods=['POST'])
+@app.route("/summarise", methods=['POST'])
 @cross_origin()
-def addcontent():
+def summarise():
     post_data = request.get_json()
     title = post_data['title']
     content = post_data['content']
-    check_unique = Textfile.query.filter_by(title=title).first()
-
-    if check_unique is None:
-        new_content = Textfile(title=title, content=content)
-        db.session.add(new_content)
-        db.session.commit()
-        session['title'] = title
-        return {'success': 'Done'}
-
-    elif title == check_unique.title:
-        return {'failure': 'Please enter a different title for your file. The one entered already exists'}
+    new_content = modify(content)
+    return jsonify({'data': new_content}), 200
 
 
-@app.route("/showresult", methods=['GET'])
-@cross_origin()
-def showresult():
-    get_data = Textfile.query.filter_by(title=session['title']).first()
-    data = {'title': get_data.title, 'content': get_data.content}
-    return jsonify(data)
+def modify(content):
+    new_content = ""
+    for character in content:
+        if character == '.':
+            continue
+        else:
+            new_content += character
+    return new_content

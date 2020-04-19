@@ -139,14 +139,16 @@ function App() {
                                 className="btn btn-outline-info"
                                 onClick={() => {
                                     setUploading(true);
-                
                                     axios({
                                         method: "POST",
                                         headers: {
                                             "Access-Control-Allow-Origin": "*",
                                             "Content-Type" : "application/json"
                                         },
-                                        data: JSON.stringify(text),
+                                        data: {
+                                            "title":filename,
+                                            "content":text
+                                        },
                                         url: "http://localhost:5000/addcontent",
                                         onUploadProgress: (ev) => {
                                             const progress = ev.loaded / ev.total * 100;
@@ -224,7 +226,6 @@ function App() {
                                     setSummary(data.content);
                                     })
                                 );
-
                                 setShow(true);
                             }}
                             >
@@ -240,9 +241,6 @@ function App() {
                     </div>
                 )
             }
-                
-                
-
             </div>
         </div>
     )
