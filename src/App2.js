@@ -91,39 +91,72 @@ function App() {
         </div>
 
         <div className="row justify-content-center pt-5">
-          <label className={"btn btn-outline-" + textcolor}>
-            <i className="fas fa-file-alt"></i> Select a file
+					<div className="col col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6">
+						<label className={"btn btn-block btn-outline-" + textcolor + " mr-2"}>
+							<i className="fas fa-file-alt"></i> Select a document
+								<input 
+									type="file" 
+									className="form-control-file" 
+									accept=".txt" 
+									id="selectFile"
+									onChange={(file) => {
+											if(file != null){
+													
+													if((file.target.files[0].name).split('.').pop() === "txt"){
+														var fileToLoad = file.target.files[0];
+														var fileReader = new FileReader();
+														fileReader.onload = (fileLoadedEvent) => {
+															var textFromFileLoaded = fileLoadedEvent.target.result;
+															setOcr(textFromFileLoaded);
+														}
+														fileReader.readAsText(fileToLoad, "UTF-8");
+														
+													} 
+													// else if((file.target.files[0].name).split('.').pop() === "pdf"){
+													// 	var pdfUtil = require('pdf-to-text');
+													// 	var pdf_path = URL.createObjectURL(file.target.files[0]);
+
+													// 	pdfUtil.pdfToText(pdf_path, function(err,data) {
+													// 		if (err) throw(err);
+													// 		console.log(data);
+													// 	});
+													// }
+
+													setPage(2);
+													setFilename(file.target.files[0].name);
+													setFilesize(file.target.files[0].size);
+											}                        
+									}}
+									hidden
+								/>
+						</label>
+					</div>
+
+				</div>
+						
+				<div className="row justify-content-center">
+					or
+				</div>
+
+				<div className="row justify-content-center pt-2">
+					<div className="col col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6">
+						<label className={"btn btn-block btn-outline-" + textcolor }>
+            <i className="fas fa-image"></i> Select an image
               <input 
                 type="file" 
                 className="form-control-file" 
-                accept=".txt, .bmp, .jpg, .png, .pbm" 
+                accept="image/*" 
                 id="selectFile"
                 onChange={(file) => {
                     if(file != null){
-                        
-                        if((file.target.files[0].name).split('.').pop() !== "txt"){
-
-                          doOCR(URL.createObjectURL(file.target.files[0]));
-
-                        } else {
-
-                          var fileToLoad = file.target.files[0];
-                          var fileReader = new FileReader();
-                          fileReader.onload = (fileLoadedEvent) => {
-                            var textFromFileLoaded = fileLoadedEvent.target.result;
-                            setOcr(textFromFileLoaded);
-                          }
-                          fileReader.readAsText(fileToLoad, "UTF-8");
-                          
-                          setPage(2);
-                        }
-
-                        setFilename(file.target.files[0].name);
-                        setFilesize(file.target.files[0].size);
+											doOCR(URL.createObjectURL(file.target.files[0]));
+                      setFilename(file.target.files[0].name);
+                      setFilesize(file.target.files[0].size);
                     }                        
                 }}
-                hidden/>
+                hidden capture/>
             </label>
+					</div>
         </div>
         {
           (ocrShow)?
@@ -214,7 +247,7 @@ function App() {
                         setPage(3);
                         setUploading(false);
                         updateUploadProgress(0);
-                    },2000)
+                    },1000)
                 })
                 .catch((err) => console.log(err));
             }}>
@@ -275,12 +308,6 @@ function App() {
           <button 
             className={"btn btn-outline-" + textcolor}
             onClick={()=>{
-                // fetch("http://localhost:5000/showresult")
-                // .then(response => response.json()
-                // .then(data => {
-                //     setSummary(data.content);
-                //     })
-                // );
 
                 setShow(true);
             }}
@@ -289,10 +316,10 @@ function App() {
           </button>
         </div>
 
-        <div className="row justify-content-center pt-5 pl-3 pr-3">
-          <samp>{
+        <div className="row justify-content-center mt-5 ml-3 mr-3">
+          <p className="lead text-justify">{
               (show) ? summary : null
-          }</samp>
+          }</p>
         </div>
       </div>
     );
@@ -322,16 +349,6 @@ function App() {
       <div className="container pt-5">
         <Page/>
       </div>
-
-      {/* <input 
-      type="file" 
-      className="form-control-file" 
-      accept=".txt, .bmp, .jpg, .png, .pbm" 
-      id="selectFile"
-      onChange={(file) => {
-        doOCR(URL.createObjectURL(file.target.files[0]));
-      }}/>
-      <p>{ocr}</p> */}
     </div>
   );
 }
