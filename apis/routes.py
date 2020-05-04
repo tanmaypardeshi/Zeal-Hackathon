@@ -1,6 +1,8 @@
 from flask import jsonify, request
-from apis import app
+from apis import app, bcrypt, db
 from flask_cors import cross_origin
+from flask_jwt_extended import create_access_token
+from .models import User
 
 
 @app.route("/summarise", methods=['POST'])
@@ -22,9 +24,55 @@ def info_retrieval():
     if filtertype == 'Name':
         new_content = modify2(query)
         return jsonify({'data': new_content}), 200
-    else:
-        new_content = modify3(query)
-        return jsonify({'data': new_content}), 200
+    new_content = modify3(query)
+    return jsonify({'data': new_content}), 200
+
+
+@app.route("/register", methods=['POST'])
+@cross_origin()
+def register():
+    user_data = request.get_json()
+    email = user_data['email']
+    name = user_data['name']
+    password = bcrypt.generate_password_hash(user_data['password']).decode('utf-8')
+    profession = user_data['profession']
+    try:
+        user = User(email=email, name=name, profession=profession, password=password)
+        db.session.add(user)
+        db.session.commit()
+        token = create_access_token(identity={'name': name, 'email': email})
+        data = {
+            'token': token,
+            'email': email,
+            'name': name,
+            'profession': profession,
+        }
+        return jsonify({'data': data}), 200
+    except:
+        return jsonify({'error': 'User already exists'}), 400
+
+
+@app.route("/login", methods=['POST'])
+@cross_origin()
+def login():
+    user_data = request.get_json()
+    email = user_data['email']
+    password = user_data['password']
+    try:
+        object_data = User.query.filter_by(email=email).first()
+        check_password = object_data.password
+        if bcrypt.check_password_hash(check_password, password):
+            token = create_access_token(identity={'name': object_data.name, 'email': object_data.email})
+            data = {
+                'token': token,
+                'email': object_data.email,
+                'name': object_data.name,
+                'profession': object_data.profession,
+            }
+            return jsonify({'data': data}), 200
+        return jsonify({'error': 'Password is wrong'}), 400
+    except:
+        return jsonify({'error': 'User does not exist'}), 400
 
 
 def modify1(content):

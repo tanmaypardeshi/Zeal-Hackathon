@@ -74,7 +74,7 @@ export default function NavBar(props) {
                     "Content-Type" : "application/json"
                 },
                 data: {
-                    "emailAddr": emailAddr,
+                    "email": emailAddr,
                     "name": name,
                     "password": password,
                     "profession": job
