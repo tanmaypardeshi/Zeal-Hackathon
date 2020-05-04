@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from apis import app, bcrypt, db
 from flask_cors import cross_origin
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from .models import User
 
 
@@ -36,6 +36,16 @@ def register():
     name = user_data['name']
     password = bcrypt.generate_password_hash(user_data['password']).decode('utf-8')
     profession = user_data['profession']
+
+    if not email:
+        return jsonify({'error': 'Missing email'}), 400
+    if not name:
+        return jsonify({'error': 'Missing name'}), 400
+    if not password:
+        return jsonify({'error': 'Missing password'}), 400
+    if not profession:
+        return jsonify({'error': 'Missing profession'}), 400
+
     try:
         user = User(email=email, name=name, profession=profession, password=password)
         db.session.add(user)
@@ -49,7 +59,7 @@ def register():
         }
         return jsonify({'data': data}), 200
     except:
-        return jsonify({'error': 'User already exists'}), 400
+        return jsonify({'error': 'User already exists'}), 401
 
 
 @app.route("/login", methods=['POST'])
@@ -58,6 +68,10 @@ def login():
     user_data = request.get_json()
     email = user_data['email']
     password = user_data['password']
+    if not email:
+        return jsonify({'error': 'Missing email'}), 400
+    if not password:
+        return jsonify({'error': 'Missing password'}), 400
     try:
         object_data = User.query.filter_by(email=email).first()
         check_password = object_data.password
@@ -70,9 +84,16 @@ def login():
                 'profession': object_data.profession,
             }
             return jsonify({'data': data}), 200
-        return jsonify({'error': 'Password is wrong'}), 400
+        return jsonify({'error': 'Password is wrong'}), 401
     except:
-        return jsonify({'error': 'User does not exist'}), 400
+        return jsonify({'error': 'User does not exist'}), 401
+
+
+@app.route('/protected', methods=['GET'])
+@jwt_required
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
 
 
 def modify1(content):
