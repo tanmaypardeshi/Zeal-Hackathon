@@ -2,8 +2,6 @@ import React,{ useContext, useState, useEffect } from "react";
 import {Form, InputGroup, Button, DropdownButton, Dropdown, Toast} from 'react-bootstrap';
 import {ThemeContextConsumer} from '../context/themer';
 import {SummaryContextConsumer} from '../context/summary';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faImage, faFileAlt} from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import Tesseract from 'tesseract.js';

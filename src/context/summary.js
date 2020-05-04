@@ -1,5 +1,5 @@
 import React, {useState, createContext} from 'react';
-const {Provider, Consumer} = createContext();
+const {Provider, Consumer} = createContext(undefined, undefined);
 
 const SummaryContextProvider = props => {
     const [summary, setSummary] = useState("");
