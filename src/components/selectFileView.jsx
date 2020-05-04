@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faImage, faFileAlt} from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import { createWorker } from 'tesseract.js';
+import Tesseract from 'tesseract.js';
 
 function SelectFileView(props){
     
@@ -16,17 +16,18 @@ function SelectFileView(props){
     // Normal File Upload Handlers
     
     const [showAlert, setShowAlert] = useState(false);
-    const [text, setText] = useState("");
+    const [text, setText] = useState('Recognizing...');
     const [fileName, setFileName] = useState("");
     const [fileSize, setFileSize] = useState(0);
-    const [summary, setSummary] = useState("");
+    const [summary, setSummary] = useState('summary');
     const [uploading, setUploading] = useState(false);
     const [summarizing, setSummarizing] = useState(false);
 
     // OCR File Upload Handlers
 
-    const [ocrProgStat, setOcrProgStat] = useState("");
+    const [ocrProgStat, setOcrProgStat] = useState();
     const [ocrProgress, setOcrProgress] = useState(0);
+    const [showOcr, setShowOcr] = useState(false);
 
     // Doc Search Handlers
 
@@ -39,6 +40,9 @@ function SelectFileView(props){
     ])
 
     const summarize = () => {
+
+        console.log(text);
+
         axios({
             method: "POST",
             headers: {
@@ -69,23 +73,27 @@ function SelectFileView(props){
         .catch((err) => console.log(err));
     }
 
-    const worker = createWorker({
-        logger: m => 
-          console.log(m)
-          //setOcrProgStat(m.status);
-          //setOcrProgress(Math.round(m.progress*100));
-          //setOcrShow(true);
-        
-    });
-    
-    const doOCR = async (file) => {
-        await worker.load();
-        await worker.loadLanguage('eng');
-        await worker.initialize('eng');
-        const { data: { ocrtext } } = await worker.recognize(file);
-        setText(ocrtext);
-        summarize();
-    };
+    const doOCR = (file) => {
+        Tesseract.recognize(
+            file,
+            'eng',
+            { 
+                logger: m => {
+                    console.log(m)
+                    setShowOcr(true);
+                    setShowAlert(true);
+                    setOcrProgStat(m.status);
+                    setOcrProgress(Math.round(m.progress*100));
+                } 
+            }
+        ).then(({ data: { text } }) => {
+            console.log(text);
+            setText(text);
+            setShowOcr(false);
+            setUploading(true);
+            //summarize();
+        })
+    }
 
     const docSubmitHandler = (file) => {
         var fileToLoad = file.target.files[0];
@@ -93,14 +101,12 @@ function SelectFileView(props){
         fileReader.onload = (fileLoadedEvent) => {
             var textFromFileLoaded = fileLoadedEvent.target.result;
             setText(textFromFileLoaded);
-            //console.log(textFromFileLoaded);
         }
         fileReader.readAsText(fileToLoad, "UTF-8");
         setFileName(file.target.files[0].name);
         setFileSize(file.target.files[0].size);
         setShowAlert(true);
         setUploading(true);
-        summarize();
     }
 
     const searchQueryHandler = (event) => {
@@ -202,7 +208,12 @@ function SelectFileView(props){
                                         className="form-control-file" 
                                         accept="image/*" 
                                         id="selectFile"
-                                        onChange={(file) => {doOCR(file)}}
+                                        onChange={(file) => {
+                                            
+                                            setFileName(file.target.files[0].name);
+                                            setFileSize(file.target.files[0].size);
+                                            doOCR(URL.createObjectURL(file.target.files[0]))}
+                                        }
                                         hidden capture/>
                                     </label>
     
@@ -272,9 +283,19 @@ function SelectFileView(props){
                                     </Toast.Header>
                                     <Toast.Body>
                                         {
+                                            (showOcr)
+                                            ?
+                                            <>{ocrProgStat + ": " + ocrProgress + "%"}</>
+                                            :
                                             uploading
                                             ? 
-                                            "Uploading File"
+                                            <Button 
+                                                variant = "outline-dark" 
+                                                size = "sm" 
+                                                onClick = {summarize}
+                                                block>
+                                                Upload File?
+                                            </Button>
                                             :
                                             summarizing
                                             ?
