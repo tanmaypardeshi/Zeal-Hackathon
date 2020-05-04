@@ -33,9 +33,7 @@ function SelectFileView(props){
     const [irFilter,setIRFilter] = useState("");
     const [searching, setSearching] = useState(false);
     const [showResult, setShowResult] = useState(false);
-    const [results, setResults] = useState([
-        'Result1', 'Result2', 'Result3'
-    ])
+    const [results, setResults] = useState({})
 
     const summarize = () => {
 
@@ -109,9 +107,9 @@ function SelectFileView(props){
 
     const searchQueryHandler = (event) => {
         event.preventDefault();
-        console.log(irQuery, irFilter);
-        setShowResult(true);
-        /* setSearching(true);
+        //console.log(irQuery, irFilter);
+        //setShowResult(true);
+        setSearching(true);
         axios({
             method: "POST",
             headers: {
@@ -123,19 +121,21 @@ function SelectFileView(props){
                 "filter" : irFilter
             },
             url: "http://localhost:5000/irquery",
-            onUploadProgress: (ev) => {
-                const progress = Math.round(ev.loaded / ev.total * 100);
-                if(progress === 100) {
-                    setUploading(false);
-                    setSummarizing(true);
-                }
-            }
+            // onUploadProgress: (ev) => {
+            //     const progress = Math.round(ev.loaded / ev.total * 100);
+            //     if(progress === 100) {
+            //         setUploading(false);
+            //         setSummarizing(true);
+            //     }
+            // }
         })
         .then((response) => {
-            console.log(response);
+            //console.log(response);
+            setResults(response.data.data);
             setSearching(false);
+            setShowResult(true);
         })
-        .catch((err) => console.log(err)); */
+        .catch((err) => console.log(err));
     }
 
     return(
@@ -256,12 +256,19 @@ function SelectFileView(props){
                                             </InputGroup>
                                         </Form.Group>
                                     </Form>
+                                    {
+                                        (searching)
+                                        ?
+                                        <span className="badge badge-info">Searching...</span>
+                                        :
+                                        null
+                                    }
                                     
                                     {
                                         (showResult)
                                         ?
                                         <h1 className="display-4 mt-5">
-                                            Results <i class="fas fa-long-arrow-alt-down"></i>
+                                            Results <i className="fas fa-long-arrow-alt-down"></i>
                                         </h1>
                                         :
                                         null
@@ -328,21 +335,27 @@ function SelectFileView(props){
                         >
                             <div className="row">
                                     {
-                                    results.map((name, index) => {
+                                    results.map((result, index) => {
                                         return(
-                                                <div className="card w-100 mb-4" key = {index}>
-                                                    <div className="card-header">
-                                                        Author no: {index+1}
-                                                    </div>
-                                                    <div class="card-body">
-                                                        This is {name}. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum tempore consectetur, a cumque laborum sequi sapiente. Quas modi obcaecati atque ducimus nemo quaerat, deserunt libero adipisci. Soluta labore quos eos.
-                                                    </div>
-                                                    <div className="card-footer">
-                                                        <Button>
-                                                            View Full Article
-                                                        </Button>
-                                                    </div>
+                                            <div 
+                                            className={"card w-100 mb-4 " + (context.dark ? "text-white" : "bg-light")} 
+                                            style = {{
+                                                background: (context.dark ? "#020220" : "")
+                                            }}
+                                            key = {index}>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">
+                                                        {result.title}
+                                                    </h5>
+                                                    <p className="card-text">
+                                                    {result.content}
+                                                    </p>
+                                                    <blockquote className="blockquote mb-0">
+                                                        <footer className="blockquote-footer"><cite title="Source Title">{result.author_name}</cite></footer>
+                                                    </blockquote>
+                                                    <a href={result.link} className="card-link ml-auto">View Full Article</a>
                                                 </div>
+                                            </div>
                                         )
                                     })
                                     }
