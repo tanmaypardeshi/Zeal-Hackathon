@@ -180,7 +180,7 @@ export default function NavBar(props) {
                             />
                             {loginError
                             ?
-                            <p className="text-danger">"Invalid Credentials!"</p>
+                            <p className="text-danger"><small>"Invalid Credentials!"</small></p>
                             :null}
                             <Form.Control.Feedback type = "invalid">
                                 "Password required!"
@@ -273,6 +273,18 @@ export default function NavBar(props) {
                                     <Form.Control.Feedback type = "invalid">
                                         "Select a profession!"
                                     </Form.Control.Feedback>
+                                    
+                                    {
+                                        signUpError 
+                                        ? 
+                                        <p className="text-danger">
+                                            <small>
+                                                "Account already exists!"
+                                            </small>
+                                        </p>
+                                        :
+                                        null
+                                    }
                             </Form.Group>
     
                             <Button variant="primary" type="submit" block>
