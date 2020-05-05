@@ -10,11 +10,13 @@ import {SummaryContextProvider} from './context/summary';
 
 ReactDOM.render(
   <React.StrictMode>
+      
     <SummaryContextProvider>
     <ThemeContextProvider>
     <App />
     </ThemeContextProvider>
     </SummaryContextProvider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
