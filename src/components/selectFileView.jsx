@@ -328,7 +328,7 @@ function SelectFileView(props){
                                     (showResult)
                                     ?
                                     <>
-                                    <h1 className="display-4 mt-n5 pt-n5">
+                                    <h1 className={"display-4 mt-n5 pt-n5" + (context.dark ? " text-white" : "")}>
                                         Results
                                     </h1>
                                     {
