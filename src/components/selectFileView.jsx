@@ -1,4 +1,4 @@
-import React,{ useContext, useState, useEffect } from "react";
+import React,{ useState, useRef } from "react";
 import {Form, InputGroup, Button, DropdownButton, Dropdown, Toast} from 'react-bootstrap';
 import {ThemeContextConsumer} from '../context/themer';
 import {SummaryContextConsumer} from '../context/summary';
@@ -34,6 +34,13 @@ function SelectFileView(props){
     const [searching, setSearching] = useState(false);
     const [showResult, setShowResult] = useState(false);
     const [results, setResults] = useState({})
+
+    // Scroll handler
+
+    const searchRef = useRef(null);
+    // const scrollToBottom = () => { searchRef.current.scrollIntoView({behavior : "smooth"}) }
+    // useEffect(scrollToBottom, [results]);
+
 
     const summarize = () => {
 
@@ -107,8 +114,6 @@ function SelectFileView(props){
 
     const searchQueryHandler = (event) => {
         event.preventDefault();
-        //console.log(irQuery, irFilter);
-        //setShowResult(true);
         setSearching(true);
         axios({
             method: "POST",
@@ -130,10 +135,10 @@ function SelectFileView(props){
             // }
         })
         .then((response) => {
-            //console.log(response);
             setResults(response.data.data);
             setSearching(false);
             setShowResult(true);
+            searchRef.current.scrollIntoView({behavior : "smooth"});
         })
         .catch((err) => console.log(err));
     }
@@ -250,30 +255,19 @@ function SelectFileView(props){
                                                 type="submit"
                                                 onClick = {searchQueryHandler}
                                                 >
+                                                    {searching 
+                                                    ? 
+                                                    <div className="spinner-border spinner-border-sm text-light" role="status">
+                                                        <span className="sr-only">Loading...</span>
+                                                    </div>
+                                                    :
                                                     <i className="fas fa-search"></i>
+                                                    }
                                                 </Button>
                                                 </InputGroup.Append>
                                             </InputGroup>
                                         </Form.Group>
-                                    </Form>
-                                    {
-                                        (searching)
-                                        ?
-                                        <span className="badge badge-info">Searching...</span>
-                                        :
-                                        null
-                                    }
-                                    
-                                    {
-                                        (showResult)
-                                        ?
-                                        <h1 className="display-4 mt-5">
-                                            Results <i className="fas fa-long-arrow-alt-down"></i>
-                                        </h1>
-                                        :
-                                        null
-                                    }
-    
+                                    </Form>    
                                 </div>
                             </div>
                         </div>
@@ -328,12 +322,15 @@ function SelectFileView(props){
                         
     
                     </div>
-                    {
-                        (showResult)
-                        ?
-                        <div className="container justify-content-center" 
-                        >
+                        <div className="container justify-content-center" ref={searchRef}>
                             <div className="row">
+                                    {
+                                    (showResult)
+                                    ?
+                                    <>
+                                    <h1 className="display-4 mt-n5 pt-n5">
+                                        Results
+                                    </h1>
                                     {
                                     results.map((result, index) => {
                                         return(
@@ -359,11 +356,12 @@ function SelectFileView(props){
                                         )
                                     })
                                     }
+                                    </>
+                                    :
+                                    null
+                                    }
                             </div>
                         </div>
-                        :
-                        <></>
-                    }
                     </div>
                 )}
             </ThemeContextConsumer>
