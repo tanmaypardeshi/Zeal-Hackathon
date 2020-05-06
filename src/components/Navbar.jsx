@@ -3,13 +3,14 @@ import {Modal, Button, Dropdown, Form, Row, Col} from 'react-bootstrap';
 import {ThemeContextConsumer} from '../context/themer';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 export default function NavBar(props) {
 
     
+    let history = useHistory();
     const [showLogIn, setShowLogIn] = useState(false);
     const toggleLogIn = () => setShowLogIn(!showLogIn);
 
@@ -99,13 +100,24 @@ export default function NavBar(props) {
 
     const logOut = (e) => {
         e.preventDefault();
-        localStorage.clear();
+        localStorage.clear();   // WARNING: COMPLETELY CLEARS LOCALSTORAGE
         setTokenUser(null);
         setLoginError(false);
         setLoginValidated(false);
         setSignupValidated(false);
         setPwdMismatch(false);
         setSignUpErr(false);
+        history.push('/');
+    }
+
+    const fetchSummaries = (e) => {
+        localStorage.setItem('dummyItem', 'DummySummaries');
+        // perform axios request here to fetch summaries of user and store in localStorage
+    }
+
+    const fetchQueries = (e) => {
+        localStorage.setItem('dummyItem', 'DummyQueries');
+        // perform axios request here to fetch queries of user and store in localStorage
     }
 
     return(
@@ -123,10 +135,14 @@ export default function NavBar(props) {
                                 <Dropdown.Item> 
                                     <h1 className="display-4">{tokenUser}</h1>
                                 </Dropdown.Item>
-                                {/* <Dropdown.Item>My Summaries</Dropdown.Item>
-                                <Dropdown.Item>My Queries</Dropdown.Item> */}
+                                <Link to = '/mysummaries' style={{ textDecoration: 'none', color: 'black' }}>
+                                    <Dropdown.Item as = "button" onClick={fetchSummaries}>My Summaries</Dropdown.Item>
+                                </Link>
+                                <Link to = '/myqueries' style={{ textDecoration: 'none', color: 'black'}}>
+                                    <Dropdown.Item as = "button" onClick={fetchQueries}>My Queries</Dropdown.Item>
+                                </Link>
                                 <Dropdown.Divider />
-                                <Dropdown.Item onClick={logOut}>Log Out</Dropdown.Item> 
+                                <Dropdown.Item as = "button" onClick={logOut}>Log Out</Dropdown.Item>
                                 </>
                                 :
                                 <>
