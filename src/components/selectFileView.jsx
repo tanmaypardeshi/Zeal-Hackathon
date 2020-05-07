@@ -44,13 +44,14 @@ function SelectFileView(props){
 
     const summarize = () => {
 
-        console.log(text);
+        console.log(localStorage.usertoken);
 
         axios({
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                Authorization: `Bearer ${localStorage.usertoken}`
             },
             data: {
                 "title":fileName,
@@ -119,7 +120,8 @@ function SelectFileView(props){
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                Authorization: `Bearer ${localStorage.usertoken}`
             },
             data: {
                 "query" : irQuery,

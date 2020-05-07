@@ -127,14 +127,16 @@ export default function NavBar(props) {
                     <nav className={"navbar justify-content-between fixed-top text-" + (context.dark ? 'light' : 'dark')}>
                     <span className="navbar-brand mb-0 h1">CLASP</span>
                     <Dropdown>
-                    <Dropdown.Toggle variant={"outline-" + (context.dark ? 'light' : 'dark')} id="dropdown-basic"></Dropdown.Toggle>
+                    <Dropdown.Toggle variant={(context.dark ? 'light' : 'dark')} id="dropdown-basic">
+                        {localStorage.length ? jwt_decode(localStorage.usertoken).identity.name : null}
+                    </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {
                                 (localStorage.length) ? 
                                 <>
-                                <Dropdown.Item> 
+                                {/* <Dropdown.Item> 
                                     <h1 className="display-4">{tokenUser}</h1>
-                                </Dropdown.Item>
+                                </Dropdown.Item> */}
                                 <Link to = '/mysummaries' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Dropdown.Item as = "button" onClick={fetchSummaries}>My Summaries</Dropdown.Item>
                                 </Link>
