@@ -2,16 +2,22 @@ from flask import jsonify, request
 from apis import app, bcrypt, db
 from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from .models import User
+from .models import User, Summary, Info
 
 
 @app.route("/summarise", methods=['POST'])
 @cross_origin()
 def summarise():
     post_data = request.get_json()
+    email = post_data['email']
     title = post_data['title']
     content = post_data['content']
     new_content = modify1(content)
+    if email != "":
+        user = User.query.filter_by(email=email).first()
+        summary = Summary(title=title, summary=new_content, user_id=user.id)
+        db.session.add(summary)
+        db.session.commit()
     return jsonify({'data': new_content}), 200
 
 
@@ -19,6 +25,7 @@ def summarise():
 @cross_origin()
 def info_retrieval():
     post_data = request.get_json()
+    email = post_data['email']
     query = post_data['query']
     filtertype = post_data['filter']
     if filtertype == 'Name':

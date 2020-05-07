@@ -1,4 +1,3 @@
-from datetime import datetime
 from apis import db
 
 
@@ -11,3 +10,13 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.email}', '{self.name}')"
+
+
+class Summary(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(1000), nullable=False)
+    summary = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"Summary('{self.title}', '{self.user_id}')"
