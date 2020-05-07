@@ -116,18 +116,30 @@ export default function NavBar(props) {
                 {(context)=> (
                     <div>
                     <nav className={"navbar justify-content-between fixed-top text-" + (context.dark ? 'light' : 'dark')}>
-                    <span className="navbar-brand mb-0 h1">CLASP</span>
+                    <a className={"navbar-brand mb-0 h1 text-" + (context.dark ? 'light' : 'dark')} href="/">CLASP</a>
                     <Dropdown>
-                    <Dropdown.Toggle variant={(context.dark ? 'light' : 'dark')} id="dropdown-basic">
-                        {localStorage.length ? jwt_decode(localStorage.usertoken).identity.name : null}
+                    <Dropdown.Toggle 
+                    variant={(context.dark ? 'outline-light' : 'outline-dark')} 
+                    id="dropdown-basic" 
+                    bsPrefix="default" 
+                    style={{
+                        content: "none"
+                    }}>
+                        {
+                            localStorage.length 
+                            ? 
+                            <strong>{jwt_decode(localStorage.usertoken).identity.name.split(" ").map((n)=>n[0]).join("")}</strong>
+                            : 
+                            <i className="fas fa-bars"></i>
+                        }
                     </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {
                                 (localStorage.length) ? 
                                 <>
-                                {/* <Dropdown.Item> 
-                                    <h1 className="display-4">{tokenUser}</h1>
-                                </Dropdown.Item> */}
+                                <Dropdown.Item> 
+                                    {localStorage.length ? jwt_decode(localStorage.usertoken).identity.name : null}
+                                </Dropdown.Item>
                                 <Link to = '/mysummaries' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Dropdown.Item as = "button">My Summaries</Dropdown.Item>
                                 </Link>

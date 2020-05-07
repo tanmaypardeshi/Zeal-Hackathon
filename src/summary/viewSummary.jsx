@@ -22,7 +22,7 @@ export default function summary() {
                                 Your Summary
                             </h1>
                             <div className="row justify-content-center pt-3 pl-5 pr-5">
-                                <p className="lead text-justify">
+                                <p className="text-justify">
                                     {summContext.summary}
                                 </p>
                             </div>

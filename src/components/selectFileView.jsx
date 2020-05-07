@@ -170,7 +170,7 @@ function SelectFileView(props){
                         width: "100vw"
                         }}>
     
-                        <div className={"container justify-content-center text-" + (context.dark?"light":"dark")}>
+                        <div className={"container px-5 justify-content-center text-" + (context.dark?"light":"dark")}>
                             <div className="row pt-5 justify-content-center">
                                 <p className="lead">
                                     Welcome to
@@ -331,7 +331,7 @@ function SelectFileView(props){
                         
     
                     </div>
-                        <div className="container justify-content-center" ref={searchRef}>
+                        <div className="container justify-content-center px-5" ref={searchRef}>
                             <div className="row">
                                     {
                                     (showResult)
