@@ -102,8 +102,11 @@ def mysummaries():
     email = current_user['email']
     summaries = Summary.query.filter_by(user_email=email).all()
     list = []
+    objects = {}
     for summary in summaries:
-        list.append(summary.summary)
+        objects['title'] = summary.title
+        objects['summary'] = summary.summary
+        list.append(objects)
     return jsonify({'mysummaries': list})
 
 
