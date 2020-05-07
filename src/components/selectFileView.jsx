@@ -69,11 +69,11 @@ function SelectFileView(props){
             }
         })
         .then((response) => {
-            console.log(response);
+            //console.log(response);
             setSummary(response.data.data);
             setTimeout(() => {
                 setSummarizing(false);
-                console.log(summarizing);
+                //console.log(summarizing);
             },1000);
         })
         .catch((err) => console.log(err));

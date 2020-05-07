@@ -110,10 +110,6 @@ export default function NavBar(props) {
         history.push('/');
     }
 
-    const fetchSummaries = (e) => {
-        localStorage.setItem('dummyItem', 'DummySummaries');
-        // perform axios request here to fetch summaries of user and store in localStorage
-    }
 
     return(
                 <ThemeContextConsumer>
@@ -133,7 +129,7 @@ export default function NavBar(props) {
                                     <h1 className="display-4">{tokenUser}</h1>
                                 </Dropdown.Item> */}
                                 <Link to = '/mysummaries' style={{ textDecoration: 'none', color: 'black' }}>
-                                    <Dropdown.Item as = "button" onClick={fetchSummaries}>My Summaries</Dropdown.Item>
+                                    <Dropdown.Item as = "button">My Summaries</Dropdown.Item>
                                 </Link>
                                 <Dropdown.Divider />
                                 <Dropdown.Item as = "button" onClick={logOut}>Log Out</Dropdown.Item>
