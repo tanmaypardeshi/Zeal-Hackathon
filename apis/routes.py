@@ -101,13 +101,14 @@ def mysummaries():
     current_user = get_jwt_identity()
     email = current_user['email']
     summaries = Summary.query.filter_by(user_email=email).all()
-    list = []
+    mysummaries = []
     objects = {}
     for summary in summaries:
         objects['title'] = summary.title
         objects['summary'] = summary.summary
-        list.append(objects)
-    return jsonify({'mysummaries': list})
+        mysummaries.append(objects)
+        objects = {}
+    return jsonify({'mysummaries': mysummaries})
 
 
 def modify1(content):
