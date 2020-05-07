@@ -5,6 +5,7 @@ import {SummaryContextConsumer} from '../context/summary';
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import Tesseract from 'tesseract.js';
+import jwt_decode from 'jwt-decode';
 
 function SelectFileView(props){
     
@@ -44,7 +45,7 @@ function SelectFileView(props){
 
     const summarize = () => {
 
-        console.log(localStorage.usertoken);
+        //console.log(jwt_decode(localStorage.usertoken).identity.email);
 
         axios({
             method: "POST",
@@ -55,7 +56,8 @@ function SelectFileView(props){
             },
             data: {
                 "title":fileName,
-                "content":text
+                "content":text,
+                "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : ""),
             },
             url: "http://localhost:5000/summarise",
             onUploadProgress: (ev) => {
@@ -100,17 +102,21 @@ function SelectFileView(props){
     }
 
     const docSubmitHandler = (file) => {
-        var fileToLoad = file.target.files[0];
-        var fileReader = new FileReader();
-        fileReader.onload = (fileLoadedEvent) => {
-            var textFromFileLoaded = fileLoadedEvent.target.result;
-            setText(textFromFileLoaded);
+        if(file){
+            var fileToLoad = file.target.files[0];
+            var fileReader = new FileReader();
+            fileReader.onload = (fileLoadedEvent) => {
+                var textFromFileLoaded = fileLoadedEvent.target.result;
+                setText(textFromFileLoaded);
+            }
+            if(fileToLoad){
+                fileReader.readAsText(fileToLoad, "UTF-8");
+                setFileName(file.target.files[0].name);
+                setFileSize(file.target.files[0].size);
+                setShowAlert(true);
+                setUploading(true);
+            }
         }
-        fileReader.readAsText(fileToLoad, "UTF-8");
-        setFileName(file.target.files[0].name);
-        setFileSize(file.target.files[0].size);
-        setShowAlert(true);
-        setUploading(true);
     }
 
     const searchQueryHandler = (event) => {
@@ -125,7 +131,8 @@ function SelectFileView(props){
             },
             data: {
                 "query" : irQuery,
-                "filter" : irFilter
+                "filter" : irFilter,
+                "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : "")
             },
             url: "http://localhost:5000/irquery",
             // onUploadProgress: (ev) => {
@@ -320,7 +327,7 @@ function SelectFileView(props){
                             </nav>
                             :
                             <></>
-                        }
+                            }
                         
     
                     </div>
