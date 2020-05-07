@@ -115,11 +115,6 @@ export default function NavBar(props) {
         // perform axios request here to fetch summaries of user and store in localStorage
     }
 
-    const fetchQueries = (e) => {
-        localStorage.setItem('dummyItem', 'DummyQueries');
-        // perform axios request here to fetch queries of user and store in localStorage
-    }
-
     return(
                 <ThemeContextConsumer>
                 {(context)=> (
@@ -139,9 +134,6 @@ export default function NavBar(props) {
                                 </Dropdown.Item> */}
                                 <Link to = '/mysummaries' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Dropdown.Item as = "button" onClick={fetchSummaries}>My Summaries</Dropdown.Item>
-                                </Link>
-                                <Link to = '/myqueries' style={{ textDecoration: 'none', color: 'black'}}>
-                                    <Dropdown.Item as = "button" onClick={fetchQueries}>My Queries</Dropdown.Item>
                                 </Link>
                                 <Dropdown.Divider />
                                 <Dropdown.Item as = "button" onClick={logOut}>Log Out</Dropdown.Item>
