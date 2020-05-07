@@ -16,7 +16,7 @@ class Summary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(1000), nullable=False)
     summary = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer)
+    user_email = db.Column(db.String(120))
 
     def __repr__(self):
-        return f"Summary('{self.title}', '{self.user_id}')"
+        return f"Summary('{self.title}', '{self.user_email}', '{self.summary}')"

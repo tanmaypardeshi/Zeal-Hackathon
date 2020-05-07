@@ -2,7 +2,7 @@ from flask import jsonify, request
 from apis import app, bcrypt, db
 from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from .models import User, Summary, Info
+from .models import User, Summary
 
 
 @app.route("/summarise", methods=['POST'])
@@ -14,8 +14,7 @@ def summarise():
     content = post_data['content']
     new_content = modify1(content)
     if email != "":
-        user = User.query.filter_by(email=email).first()
-        summary = Summary(title=title, summary=new_content, user_id=user.id)
+        summary = Summary(title=title, summary=new_content, user_email=email)
         db.session.add(summary)
         db.session.commit()
     return jsonify({'data': new_content}), 200
@@ -25,7 +24,6 @@ def summarise():
 @cross_origin()
 def info_retrieval():
     post_data = request.get_json()
-    email = post_data['email']
     query = post_data['query']
     filtertype = post_data['filter']
     if filtertype == 'Name':
@@ -53,9 +51,10 @@ def register():
     if not profession:
         return jsonify({'error': 'Missing profession'}), 400
 
-    try:
+    if User.query.filter_by(email=email).first() != email or User.query.filter_by(email=email).first() is None:
         user = User(email=email, name=name, profession=profession, password=password)
         db.session.add(user)
+        print("HI")
         db.session.commit()
         token = create_access_token(identity={'name': name, 'email': email})
         data = {
@@ -65,7 +64,7 @@ def register():
             'profession': profession,
         }
         return jsonify({'data': data}), 200
-    except:
+    else:
         return jsonify({'error': 'User already exists'}), 401
 
 
@@ -96,11 +95,16 @@ def login():
         return jsonify({'error': 'User does not exist'}), 401
 
 
-@app.route('/protected', methods=['GET'])
+@app.route('/mysummaries', methods=['GET'])
 @jwt_required
-def protected():
+def mysummaries():
     current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
+    email = current_user['email']
+    summaries = Summary.query.filter_by(user_email=email).all()
+    list = []
+    for summary in summaries:
+        list.append(summary.summary)
+    return jsonify({'mysummaries': list})
 
 
 def modify1(content):

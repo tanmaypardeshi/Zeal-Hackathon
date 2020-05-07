@@ -1,0 +1,135 @@
+Help on list object:
+
+class lliisstt(object)
+ |  list(iterable=(), /)
+ |  
+ |  Built-in mutable sequence.
+ |  
+ |  If no argument is given, the constructor creates a new empty list.
+ |  The argument must be an iterable if specified.
+ |  
+ |  Methods defined here:
+ |  
+ |  ____aadddd____(self, value, /)
+ |      Return self+value.
+ |  
+ |  ____ccoonnttaaiinnss____(self, key, /)
+ |      Return key in self.
+ |  
+ |  ____ddeelliitteemm____(self, key, /)
+ |      Delete self[key].
+ |  
+ |  ____eeqq____(self, value, /)
+ |      Return self==value.
+ |  
+ |  ____ggee____(self, value, /)
+ |      Return self>=value.
+ |  
+ |  ____ggeettaattttrriibbuuttee____(self, name, /)
+ |      Return getattr(self, name).
+ |  
+ |  ____ggeettiitteemm____(...)
+ |      x.__getitem__(y) <==> x[y]
+ |  
+ |  ____ggtt____(self, value, /)
+ |      Return self>value.
+ |  
+ |  ____iiaadddd____(self, value, /)
+ |      Implement self+=value.
+ |  
+ |  ____iimmuull____(self, value, /)
+ |      Implement self*=value.
+ |  
+ |  ____iinniitt____(self, /, *args, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |  
+ |  ____iitteerr____(self, /)
+ |      Implement iter(self).
+ |  
+ |  ____llee____(self, value, /)
+ |      Return self<=value.
+ |  
+ |  ____lleenn____(self, /)
+ |      Return len(self).
+ |  
+ |  ____lltt____(self, value, /)
+ |      Return self<value.
+ |  
+ |  ____mmuull____(self, value, /)
+ |      Return self*value.
+ |  
+ |  ____nnee____(self, value, /)
+ |      Return self!=value.
+ |  
+ |  ____rreepprr____(self, /)
+ |      Return repr(self).
+ |  
+ |  ____rreevveerrsseedd____(self, /)
+ |      Return a reverse iterator over the list.
+ |  
+ |  ____rrmmuull____(self, value, /)
+ |      Return value*self.
+ |  
+ |  ____sseettiitteemm____(self, key, value, /)
+ |      Set self[key] to value.
+ |  
+ |  ____ssiizzeeooff____(self, /)
+ |      Return the size of the list in memory, in bytes.
+ |  
+ |  aappppeenndd(self, object, /)
+ |      Append object to the end of the list.
+ |  
+ |  cclleeaarr(self, /)
+ |      Remove all items from list.
+ |  
+ |  ccooppyy(self, /)
+ |      Return a shallow copy of the list.
+ |  
+ |  ccoouunntt(self, value, /)
+ |      Return number of occurrences of value.
+ |  
+ |  eexxtteenndd(self, iterable, /)
+ |      Extend list by appending elements from the iterable.
+ |  
+ |  iinnddeexx(self, value, start=0, stop=9223372036854775807, /)
+ |      Return first index of value.
+ |      
+ |      Raises ValueError if the value is not present.
+ |  
+ |  iinnsseerrtt(self, index, object, /)
+ |      Insert object before index.
+ |  
+ |  ppoopp(self, index=-1, /)
+ |      Remove and return item at index (default last).
+ |      
+ |      Raises IndexError if list is empty or index is out of range.
+ |  
+ |  rreemmoovvee(self, value, /)
+ |      Remove first occurrence of value.
+ |      
+ |      Raises ValueError if the value is not present.
+ |  
+ |  rreevveerrssee(self, /)
+ |      Reverse *IN PLACE*.
+ |  
+ |  ssoorrtt(self, /, *, key=None, reverse=False)
+ |      Sort the list in ascending order and return None.
+ |      
+ |      The sort is in-place (i.e. the list itself is modified) and stable (i.e. the
+ |      order of two equal elements is maintained).
+ |      
+ |      If a key function is given, apply it once to each list item and sort them,
+ |      ascending or descending, according to their function values.
+ |      
+ |      The reverse flag can be set to sort in descending order.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods defined here:
+ |  
+ |  ____nneeww____(*args, **kwargs) from builtins.type
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  ____hhaasshh____ = None
