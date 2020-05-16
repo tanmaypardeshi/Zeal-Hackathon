@@ -9,7 +9,7 @@
   4. pip and pipenv
  
 * **Steps:**
-  1. Clone the repository using<br> **git clone https://github.com/tanmaypardeshi/CDAC-Hackathon.git**
+  1. Clone the repository using<br> **git clone https://github.com/tanmaypardeshi/React-Flask.git**
   2. Use command **pipenv shell** to activate pipenv.
   3. For the first time, use **pipenv install** to install all dependencies<br>
   This will only be for the first time to install the packages.
