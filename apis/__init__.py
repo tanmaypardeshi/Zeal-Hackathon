@@ -5,8 +5,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from datetime import datetime,timedelta
 
-UPLOAD_FOLDER = '/home/tanmay/Code/Flask/React-Flask/apis/'
-ALLOWED_EXTENSIONS = set(['txt', 'docx'])
+UPLOAD_FOLDER = '/home/tanmay/Code/Flask/React-Flask'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'e13f4992e67cd52facb93c874efaf84f'

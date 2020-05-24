@@ -1,14 +1,13 @@
 import os
+import docx2txt
 from flask import jsonify, request
 from apis import app, bcrypt, db
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from summariser import create_summary
 from .models import User, Summary
-import docx2txt
 
-UPLOAD_FOLDER = 'D:\CDAC-Hackathon\CDAC-Hackathon-Latest\CDAC-Hackathon'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/api/upload", methods=['POST'])
 @cross_origin()
@@ -19,13 +18,12 @@ def uploadfile():
     file = request.files['file'] 
     filename = secure_filename(file.filename)
     destination="/".join([target, filename])
-    print(destination[-4:])
     if destination[-4:] != 'docx':
         return jsonify({'error': '.docx file required!'}), 400
     file.save(destination)
-    print(target, file, filename, destination)
-    content = docx2txt.process(target + '\\' + filename)
-    new_content = modify1(content)
+    content = docx2txt.process(target + '/' + filename)
+    new_content = create_summary(content)
+    os.remove(target + '/' + filename)
     return jsonify({'data': new_content}), 200
 
 
