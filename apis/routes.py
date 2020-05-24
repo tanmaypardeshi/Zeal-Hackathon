@@ -1,8 +1,21 @@
+import os
 from flask import jsonify, request
 from apis import app, bcrypt, db
 from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from .models import User, Summary
+
+
+@app.route("/api/upload", methods=['POST'])
+def uploadfile():
+    target=os.path.join(UPLOAD_FOLDER,'folder')
+    if not os.path.isdir(target):
+        os.mkdir(target)
+    file = request.files['file'] 
+    filename = secure_filename(file.filename)
+    destination="/".join([target, filename])
+    file.save(destination)
+    return {"success":1}, 200
 
 
 @app.route("/api/summarise", methods=['POST'])
