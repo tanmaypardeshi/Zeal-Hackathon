@@ -8,9 +8,12 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from summariser import create_summary
 from .models import User, Summary
 
-#UPLOAD_FOLDER = '/home/tanmay/Code/Flask/React-Flask'
-UPLOAD_FOLDER = 'D:\React-Apps\React-Flask'
+UPLOAD_FOLDER = '/home/tanmay/Code/Flask/React-Flask'
+# UPLOAD_FOLDER = 'D:\React-Apps\React-Flask'
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 @app.route("/api/upload", methods=['POST'])
 @cross_origin()
 def uploadfile():
@@ -26,7 +29,7 @@ def uploadfile():
     print(destination)
     content = docx2txt.process(target + '\\' + filename)
     print(content)
-    new_content = create_summary(content)
+    new_content = modify1(content)
     #os.rmdir(target)
     return jsonify({'data': new_content}), 200
 
