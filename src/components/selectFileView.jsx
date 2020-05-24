@@ -16,11 +16,14 @@ function SelectFileView(props){
     
     const [showAlert, setShowAlert] = useState(false);
     const [text, setText] = useState('Recognizing...');
+    const [file, setFile] = useState();
     const [fileName, setFileName] = useState("");
     const [fileSize, setFileSize] = useState(0);
     const [summary, setSummary] = useState('summary');
     const [uploading, setUploading] = useState(false);
     const [summarizing, setSummarizing] = useState(false);
+
+    //const data = new FormData();
 
     // OCR File Upload Handlers
 
@@ -46,37 +49,58 @@ function SelectFileView(props){
     const summarize = () => {
 
         //console.log(jwt_decode(localStorage.usertoken).identity.email);
-
-        axios({
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type" : "application/json",
-                Authorization: `Bearer ${localStorage.usertoken}`
-            },
-            data: {
-                "title":fileName,
-                "content":text,
-                "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : ""),
-            },
-            url: "/api/summarise",
-            onUploadProgress: (ev) => {
-                const progress = Math.round(ev.loaded / ev.total * 100);
-                if(progress === 100) {
-                    setUploading(false);
-                    setSummarizing(true);
+        const filetype = fileName.split('.').pop();
+        if(filetype === 'txt'){
+            axios({
+                method: "POST",
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type" : "application/json",
+                    Authorization: `Bearer ${localStorage.usertoken}`
+                },
+                data: {
+                    "title":fileName,
+                    "content":text,
+                    "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : ""),
+                },
+                url: "/api/summarise",
+                onUploadProgress: (ev) => {
+                    const progress = Math.round(ev.loaded / ev.total * 100);
+                    if(progress === 100) {
+                        setUploading(false);
+                        setSummarizing(true);
+                    }
                 }
-            }
-        })
-        .then((response) => {
-            //console.log(response);
-            setSummary(response.data.data);
-            setTimeout(() => {
-                setSummarizing(false);
-                //console.log(summarizing);
-            },1000);
-        })
-        .catch((err) => console.log(err));
+            })
+            .then((response) => {
+                //console.log(response);
+                setSummary(response.data.data);
+                setTimeout(() => {
+                    setSummarizing(false);
+                    //console.log(summarizing);
+                },1000);
+            })
+            .catch((err) => console.log(err));
+        }
+        else {
+            const data = new FormData();
+            data.append('file', file);
+            data.append('filename', fileName);
+            axios({
+                method: 'POST',
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type" : "multipart/form-data",
+                    "Authorization": `Bearer ${localStorage.usertoken}`
+                },
+                data: data,
+                url: '/api/upload'
+            })
+            .then((response) => console.log(response))
+            .catch((err) => console.log(err))
+            //console.log(data);
+        }
+        
     }
 
     const doOCR = (file) => {
@@ -103,14 +127,24 @@ function SelectFileView(props){
 
     const docSubmitHandler = (file) => {
         if(file){
-            var fileToLoad = file.target.files[0];
-            var fileReader = new FileReader();
-            fileReader.onload = (fileLoadedEvent) => {
-                var textFromFileLoaded = fileLoadedEvent.target.result;
-                setText(textFromFileLoaded);
-            }
-            if(fileToLoad){
-                fileReader.readAsText(fileToLoad, "UTF-8");
+            const filetype = file.target.files[0].name.split('.').pop();
+            if(filetype === 'txt'){
+                var fileToLoad = file.target.files[0];
+                var fileReader = new FileReader();
+                fileReader.onload = (fileLoadedEvent) => {
+                    var textFromFileLoaded = fileLoadedEvent.target.result;
+                    setText(textFromFileLoaded);
+                }
+                if(fileToLoad){
+                    fileReader.readAsText(fileToLoad, "UTF-8");
+                    setFileName(file.target.files[0].name);
+                    setFileSize(file.target.files[0].size);
+                    setShowAlert(true);
+                    setUploading(true);
+                }
+            } else {
+                console.log(file.target.files[0]);
+                setFile(file.target.files[0]);
                 setFileName(file.target.files[0].name);
                 setFileSize(file.target.files[0].size);
                 setShowAlert(true);
@@ -202,7 +236,7 @@ function SelectFileView(props){
                                     <input 
                                         type="file" 
                                         className="form-control-file" 
-                                        accept=".txt" 
+                                        accept="text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
                                         id="selectFile"
                                         onChange={(file) => {docSubmitHandler(file)}}
                                         hidden
