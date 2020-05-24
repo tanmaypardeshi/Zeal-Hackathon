@@ -86,6 +86,8 @@ function SelectFileView(props){
             const data = new FormData();
             data.append('file', file);
             data.append('filename', fileName);
+            setUploading(false);
+            setSummarizing(true);
             axios({
                 method: 'POST',
                 headers: {
@@ -96,7 +98,10 @@ function SelectFileView(props){
                 data: data,
                 url: '/api/upload'
             })
-            .then((response) => console.log(response))
+            .then((response) => {
+                setSummary(response.data.data);
+                setSummarizing(false);
+            })
             .catch((err) => console.log(err))
             //console.log(data);
         }
