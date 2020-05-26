@@ -2,15 +2,15 @@
 
 ## COVID-19 LITERATURE ANALYSIS AND SUMMARIZATION PLATFORM
 
-#### [Use this link to access the google drive which contains our dataset,word embeddings, PPT for the project and the sample videos]()
+#### [Use this link to access the google drive which contains our dataset,word embeddings, PPT for the project and the sample videos](https://drive.google.com/drive/folders/1N7NFiDK8_AKrGEY2GWn9irBMVgsWsskx?usp=sharing)
 
-#### [Click here to open the text file used in the video recording]()
+#### [Click here to open the text file used in the video recording](https://github.com/tanmaypardeshi/Zeal-Hackathon/tree/master/data)
 
 #### [Click here to access the videos on GitHub]()
 
 #### [Click here to access the videos on Drive]()
 
-#### [Click here for the PPT for round 1]()
+#### [Click here for the PPT for round 1](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/Team%20Clasp%20Zeal%20Hackathon%20PPT.pdf)
 
 
 ### Steps to run the project:
@@ -41,13 +41,13 @@
 
 **1. [glove:]()** Embeddings used to perform text summarization and information retrieval for Real Time Research News.
 
-**2. [ir_old.csv]()** Dataset created by using CORD-19 data for Information Retrieval
+**2. [ir_old.csv](https://drive.google.com/drive/folders/1xOUJYH9ycIBSHce-qXkEZLVMIoZLAktr)** Dataset created by using CORD-19 data for Information Retrieval
 
-**3. [summariser.py:]()** Makes use of the TextRank algorithm to summarize the input Biomedical Text.
+**3. [summariser.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/summariser.py)** Makes use of the TextRank algorithm to summarize the input Biomedical Text.
 
-**4. [ir_author.py:]()** Makes use of levenshtein distance to generate a similarity score between the author based query and documents
+**4. [ir_author.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/ir_author.py)** Makes use of levenshtein distance to generate a similarity score between the author based query and documents
 
-**5. [ir_title.py:]()** Makes use of levenshtein distance and keyword indexing to generate a similarity score between the title based query and documents
+**5. [ir_title.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/ir_title.py)** Makes use of levenshtein distance and keyword indexing to generate a similarity score between the title based query and documents
 
 
 ### Research papers referred while working for the project:
