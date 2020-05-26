@@ -4,7 +4,7 @@ from flask import jsonify, request
 from apis import app, bcrypt, db
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, jwt_optional, get_jwt_identity
 from summariser import create_summary
 from .models import User, Summary
 
@@ -30,7 +30,8 @@ def uploadfile():
     content = docx2txt.process(target + '\\' + filename)
     print(content)
     new_content = modify1(content)
-    #os.rmdir(target)
+    os.remove(target + '/' + filename)
+
     return jsonify({'data': new_content}), 200
 
 
