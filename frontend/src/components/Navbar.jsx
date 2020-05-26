@@ -6,6 +6,7 @@ import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import {setUserTokenCookie, getCookie, getUserFromCookie} from '../functions/cookiefns';
 
 export default function NavBar(props) {
 
@@ -51,8 +52,8 @@ export default function NavBar(props) {
                 url: "/api/login",
             })
             .then((response) => {
-                localStorage.setItem('usertoken', response.data.data.token);
-                setTokenUser(jwt_decode(localStorage.usertoken).identity.name);
+                setUserTokenCookie(response.data.data.token);
+                setTokenUser(jwt_decode(response.data.data.token).identity.name);
                 toggleLogIn();
             })
             .catch((err) => {
@@ -87,8 +88,8 @@ export default function NavBar(props) {
                 url: "/api/register",
             })
             .then((response) => {
-                localStorage.setItem('usertoken', response.data.data.token);
-                setTokenUser(jwt_decode(localStorage.usertoken).identity.name);
+                setUserTokenCookie(response.data.data.token);
+                setTokenUser(jwt_decode(response.data.data.token).identity.name);
                 toggleSignUp();
             })
             .catch((err) => {
@@ -100,7 +101,7 @@ export default function NavBar(props) {
 
     const logOut = (e) => {
         e.preventDefault();
-        localStorage.clear();   // WARNING: COMPLETELY CLEARS LOCALSTORAGE
+        document.cookie = "usertoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; //Clears usertoken cookie
         setTokenUser(null);
         setLoginError(false);
         setLoginValidated(false);
@@ -126,19 +127,19 @@ export default function NavBar(props) {
                         content: "none"
                     }}>
                         {
-                            localStorage.length 
+                            (getUserFromCookie() !== '') 
                             ? 
-                            <strong>{jwt_decode(localStorage.usertoken).identity.name.split(" ").map((n)=>n[0]).join("")}</strong>
+                            <strong>{getUserFromCookie().split(" ").map((n)=>n[0]).join("")}</strong>
                             : 
                             <i className="fas fa-bars"></i>
                         }
                     </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {
-                                (localStorage.length) ? 
+                                (getUserFromCookie() !== '') ? 
                                 <>
                                 <Dropdown.Item> 
-                                    {localStorage.length ? jwt_decode(localStorage.usertoken).identity.name : null}
+                                    {(getUserFromCookie() !== '') ? getUserFromCookie() : null}
                                 </Dropdown.Item>
                                 <Link to = '/mysummaries' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Dropdown.Item as = "button">My Summaries</Dropdown.Item>

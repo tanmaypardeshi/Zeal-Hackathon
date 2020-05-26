@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 import Tesseract from 'tesseract.js';
 import jwt_decode from 'jwt-decode';
+import { getUserFromCookie } from "../functions/cookiefns";
 
 function SelectFileView(props){
     
@@ -48,20 +49,19 @@ function SelectFileView(props){
 
     const summarize = () => {
 
-        //console.log(jwt_decode(localStorage.usertoken).identity.email);
-        const filetype = fileName.split('.').pop();
+        const filetype = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase();
+        const cookie = getUserFromCookie();
         if(filetype === 'txt'){
             axios({
                 method: "POST",
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type" : "application/json",
-                    Authorization: `Bearer ${localStorage.usertoken}`
+                    "Authorization": `Bearer ${cookie}`
                 },
                 data: {
                     "title":fileName,
                     "content":text,
-                    "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : ""),
                 },
                 url: "/api/summarise",
                 onUploadProgress: (ev) => {
@@ -93,7 +93,7 @@ function SelectFileView(props){
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type" : "multipart/form-data",
-                    "Authorization": `Bearer ${localStorage.usertoken}`
+                    "Authorization": `Bearer ${cookie}`
                 },
                 data: data,
                 url: '/api/upload'
@@ -161,17 +161,17 @@ function SelectFileView(props){
     const searchQueryHandler = (event) => {
         event.preventDefault();
         setSearching(true);
+        const cookie = getUserFromCookie();
         axios({
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type" : "application/json",
-                Authorization: `Bearer ${localStorage.usertoken}`
+                "Authorization": `Bearer ${cookie}`
             },
             data: {
                 "query" : irQuery,
                 "filter" : irFilter,
-                "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : "")
             },
             url: "/api/irquery",
             // onUploadProgress: (ev) => {
