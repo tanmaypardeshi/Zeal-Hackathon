@@ -6,6 +6,10 @@ import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+<<<<<<< HEAD
+=======
+import {setUserTokenCookie, getCookie, getUserFromCookie} from '../functions/cookiefns';
+>>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
 
 export default function NavBar(props) {
 
@@ -51,8 +55,13 @@ export default function NavBar(props) {
                 url: "/api/login",
             })
             .then((response) => {
+<<<<<<< HEAD
                 localStorage.setItem('usertoken', response.data.data.token);
                 setTokenUser(jwt_decode(localStorage.usertoken).identity.name);
+=======
+                setUserTokenCookie(response.data.data.token);
+                setTokenUser(jwt_decode(response.data.data.token).identity.name);
+>>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
                 toggleLogIn();
             })
             .catch((err) => {
@@ -87,8 +96,13 @@ export default function NavBar(props) {
                 url: "/api/register",
             })
             .then((response) => {
+<<<<<<< HEAD
                 localStorage.setItem('usertoken', response.data.data.token);
                 setTokenUser(jwt_decode(localStorage.usertoken).identity.name);
+=======
+                setUserTokenCookie(response.data.data.token);
+                setTokenUser(jwt_decode(response.data.data.token).identity.name);
+>>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
                 toggleSignUp();
             })
             .catch((err) => {
@@ -100,7 +114,11 @@ export default function NavBar(props) {
 
     const logOut = (e) => {
         e.preventDefault();
+<<<<<<< HEAD
         localStorage.clear();   // WARNING: COMPLETELY CLEARS LOCALSTORAGE
+=======
+        document.cookie = "usertoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; //Clears usertoken cookie
+>>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
         setTokenUser(null);
         setLoginError(false);
         setLoginValidated(false);
@@ -126,19 +144,32 @@ export default function NavBar(props) {
                         content: "none"
                     }}>
                         {
+<<<<<<< HEAD
                             localStorage.length 
                             ? 
                             <strong>{jwt_decode(localStorage.usertoken).identity.name.split(" ").map((n)=>n[0]).join("")}</strong>
+=======
+                            (getUserFromCookie() !== '') 
+                            ? 
+                            <strong>{getUserFromCookie().split(" ").map((n)=>n[0]).join("")}</strong>
+>>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
                             : 
                             <i className="fas fa-bars"></i>
                         }
                     </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {
+<<<<<<< HEAD
                                 (localStorage.length) ? 
                                 <>
                                 <Dropdown.Item> 
                                     {localStorage.length ? jwt_decode(localStorage.usertoken).identity.name : null}
+=======
+                                (getUserFromCookie() !== '') ? 
+                                <>
+                                <Dropdown.Item> 
+                                    {(getUserFromCookie() !== '') ? getUserFromCookie() : null}
+>>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
                                 </Dropdown.Item>
                                 <Link to = '/mysummaries' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Dropdown.Item as = "button">My Summaries</Dropdown.Item>
