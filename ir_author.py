@@ -11,8 +11,6 @@ from gensim.models.doc2vec import Doc2Vec,TaggedDocument
 from gensim.models import doc2vec
 
 
-
-
 def Preprocessor(text):
 	new_sentence=""
 	complete_refined_text=""

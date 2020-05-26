@@ -15,5 +15,3 @@ const ThemeContextProvider = props => {
 }
 
 export {ThemeContextProvider, Consumer as ThemeContextConsumer}
-
-

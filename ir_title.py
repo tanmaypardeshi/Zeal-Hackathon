@@ -52,7 +52,7 @@ def similarity_score_title(query,data):
 		score.append(fuzz.token_sort_ratio(str(sent1),str(sent2)))
 	data['similarity_score']=score
 
-def get_info_title(query,data):
+def get_info_title(query):
 	data=pd.read_csv('data/ir_old.csv')
 	similarity_score_title(query,data)
 	df=data.sort_values(by='similarity_score',ascending=False)
