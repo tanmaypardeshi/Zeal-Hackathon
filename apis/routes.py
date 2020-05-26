@@ -94,6 +94,7 @@ def uploadfile():
     content = docx2txt.process(target + '/' + filename)
     new_content = create_summary(content)
     current_user = get_jwt_identity()
+    print(current_user)
     try:
         summary = Summary(title=filename, summary=new_content, user_email=current_user['email'])
         db.session.add(summary)
@@ -110,7 +111,7 @@ def summarise():
     post_data = request.get_json()
     title = post_data['title']
     content = post_data['content']
-    new_content = create_summary(content)
+    new_content = content
     current_user = get_jwt_identity()
     try:
         summary = Summary(title=title, summary=new_content, user_email=current_user['email'])

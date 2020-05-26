@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Container } from 'react-bootstrap';
 import { SummaryContextConsumer } from '../context/summary';
 import { ThemeContextConsumer } from '../context/themer';
-import { getUserFromCookie } from '../functions/cookiefns';
+import { getCookie } from '../functions/cookiefns';
 
 export default function MySummaries(){
 
@@ -13,13 +13,13 @@ export default function MySummaries(){
     let history = useHistory();
 
     const fetchSummaries = () => {
-        const cookie = getUserFromCookie();
+        const cookie = getCookie();
         axios({
             method: "GET",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type" : "application/json",
-                "Authorization": `Bearer ${cookie}`
+                 "Authorization": `Bearer ${cookie}`
             },
             url: "/api/mysummaries",
         })
@@ -40,7 +40,7 @@ export default function MySummaries(){
     // }
 
     return(
-        (getUserFromCookie() !== '')
+        (getCookie() !== '')
         ?
         <SummaryContextConsumer>
             {(summContext) => (

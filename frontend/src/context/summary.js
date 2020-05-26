@@ -15,3 +15,4 @@ const SummaryContextProvider = props => {
 }
 
 export {SummaryContextProvider, Consumer as SummaryContextConsumer}
+

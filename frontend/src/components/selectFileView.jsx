@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 import Tesseract from 'tesseract.js';
 import jwt_decode from 'jwt-decode';
-import { getUserFromCookie } from "../functions/cookiefns";
+import { getCookie } from "../functions/cookiefns";
 
 function SelectFileView(props){
     
@@ -50,7 +50,7 @@ function SelectFileView(props){
     const summarize = () => {
 
         const filetype = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase();
-        const cookie = getUserFromCookie();
+        const cookie = getCookie();
         if(filetype === 'txt'){
             axios({
                 method: "POST",
@@ -161,7 +161,7 @@ function SelectFileView(props){
     const searchQueryHandler = (event) => {
         event.preventDefault();
         setSearching(true);
-        const cookie = getUserFromCookie();
+        const cookie = getCookie();
         axios({
             method: "POST",
             headers: {
