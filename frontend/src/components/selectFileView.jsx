@@ -49,32 +49,19 @@ function SelectFileView(props){
 
     const summarize = () => {
 
-<<<<<<< HEAD
-        //console.log(jwt_decode(localStorage.usertoken).identity.email);
-        const filetype = fileName.split('.').pop();
-=======
         const filetype = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase();
         const cookie = getUserFromCookie();
->>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
         if(filetype === 'txt'){
             axios({
                 method: "POST",
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type" : "application/json",
-<<<<<<< HEAD
-                    Authorization: `Bearer ${localStorage.usertoken}`
-=======
                     "Authorization": `Bearer ${cookie}`
->>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
                 },
                 data: {
                     "title":fileName,
                     "content":text,
-<<<<<<< HEAD
-                    "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : ""),
-=======
->>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
                 },
                 url: "/api/summarise",
                 onUploadProgress: (ev) => {
@@ -106,11 +93,7 @@ function SelectFileView(props){
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type" : "multipart/form-data",
-<<<<<<< HEAD
-                    "Authorization": `Bearer ${localStorage.usertoken}`
-=======
                     "Authorization": `Bearer ${cookie}`
->>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
                 },
                 data: data,
                 url: '/api/upload'
@@ -178,28 +161,17 @@ function SelectFileView(props){
     const searchQueryHandler = (event) => {
         event.preventDefault();
         setSearching(true);
-<<<<<<< HEAD
-=======
         const cookie = getUserFromCookie();
->>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
         axios({
             method: "POST",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type" : "application/json",
-<<<<<<< HEAD
-                Authorization: `Bearer ${localStorage.usertoken}`
-=======
                 "Authorization": `Bearer ${cookie}`
->>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
             },
             data: {
                 "query" : irQuery,
                 "filter" : irFilter,
-<<<<<<< HEAD
-                "email": (localStorage.length ? jwt_decode(localStorage.usertoken).identity.email : "")
-=======
->>>>>>> c531c3d83b84641be1207d4e879d114a3fcc5cd9
             },
             url: "/api/irquery",
             // onUploadProgress: (ev) => {
