@@ -39,15 +39,15 @@
 ### Documentation about the files in the repository
 #### (Click on the links to open the folder)
 
-**1. [glove:](https://drive.google.com/drive/folders/1nKAo8oWqPuq39ky15duuhpt3sWEhyV-7)** Embeddings used to perform text summarization and information retrieval for Real Time Research News.
+**1. [glove:]()** Embeddings used to perform text summarization and information retrieval for Real Time Research News.
 
-**2. [ir_old.csv](https://drive.google.com/drive/folders/1MAMWa5IZ9z2k_u2SpYXrVHLCoT5EMy3J)** Dataset created by using CORD-19 data for Information Retrieval
+**2. [ir_old.csv]()** Dataset created by using CORD-19 data for Information Retrieval
 
-**3. [summariser.py:](https://github.com/tanmaypardeshi/CDAC-Hackathon/blob/master/summariser.py)** Makes use of the TextRank algorithm to summarize the input Biomedical Text.
+**3. [summariser.py:]()** Makes use of the TextRank algorithm to summarize the input Biomedical Text.
 
-**4. [ir_author.py:](https://github.com/tanmaypardeshi/CDAC-Hackathon/blob/master/ir_author.py)** Makes use of levenshtein distance to generate a similarity score between the author based query and documents
+**4. [ir_author.py:]()** Makes use of levenshtein distance to generate a similarity score between the author based query and documents
 
-**5. [ir_title.py:](https://github.com/tanmaypardeshi/CDAC-Hackathon/blob/master/ir_title.py)** Makes use of levenshtein distance and keyword indexing to generate a similarity score between the title based query and documents
+**5. [ir_title.py:]()** Makes use of levenshtein distance and keyword indexing to generate a similarity score between the title based query and documents
 
 
 ### Research papers referred while working for the project:
