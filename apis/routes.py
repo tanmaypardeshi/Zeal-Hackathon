@@ -135,7 +135,6 @@ def mysummaries():
         objects['summary'] = summary.summary
         my_summaries.append(objects)
         objects = {}
-    print(my_summaries)
     return jsonify({'mysummaries': my_summaries})
 
 

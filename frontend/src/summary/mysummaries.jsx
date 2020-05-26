@@ -13,13 +13,13 @@ export default function MySummaries(){
     let history = useHistory();
 
     const fetchSummaries = () => {
-        const cookie = getCookie();
+        const cookie = getCookie("usertoken");
         axios({
             method: "GET",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type" : "application/json",
-                 "Authorization": `Bearer ${cookie}`
+                "Authorization": `Bearer ${cookie}`
             },
             url: "/api/mysummaries",
         })

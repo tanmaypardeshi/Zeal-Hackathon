@@ -1,4 +1,4 @@
-import React, {useState, createContext} from 'react';
+ import React, {useState, createContext} from 'react';
 const {Provider, Consumer} = createContext();
 
 const ThemeContextProvider = props => {
@@ -15,5 +15,3 @@ const ThemeContextProvider = props => {
 }
 
 export {ThemeContextProvider, Consumer as ThemeContextConsumer}
-
-

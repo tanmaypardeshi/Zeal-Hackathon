@@ -50,7 +50,7 @@ function SelectFileView(props){
     const summarize = () => {
 
         const filetype = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase();
-        const cookie = getCookie();
+        const cookie = getCookie("usertoken");
         if(filetype === 'txt'){
             axios({
                 method: "POST",
