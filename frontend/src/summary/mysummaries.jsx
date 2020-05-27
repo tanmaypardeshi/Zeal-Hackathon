@@ -9,11 +9,12 @@ import { getCookie } from '../functions/cookiefns';
 export default function MySummaries(){
 
     const [mySumms, setMySumms] = useState([]);
-    const [dummyvar, setDummyVar] = useState();
+    const [cookie, setCookie] = useState(getCookie("usertoken"))
+    const dummy = null;
     let history = useHistory();
 
     const fetchSummaries = () => {
-        const cookie = getCookie("usertoken");
+        //const cookie = getCookie("usertoken");
         axios({
             method: "GET",
             headers: {
@@ -32,7 +33,9 @@ export default function MySummaries(){
         .catch((err) => console.log(err));
     }
 
-    useEffect(() => { fetchSummaries() }, [dummyvar]);
+    useEffect(() => { 
+        fetchSummaries(); 
+    }, [dummy]);
 
     // const handleClick = (event) => {
     //     //console.log(event.currentTarget.value);
@@ -40,7 +43,7 @@ export default function MySummaries(){
     // }
 
     return(
-        (getCookie() !== '')
+        (cookie !== '')
         ?
         <SummaryContextConsumer>
             {(summContext) => (
@@ -76,7 +79,7 @@ export default function MySummaries(){
                                             {
                                                 mySumms.map((contents,index) => {
                                                     return(
-                                                        <tr>
+                                                        <tr key = {index}>
                                                             <th scope = "row">{index+1}</th>
                                                             <td>{contents.title}</td>
                                                             <td>
@@ -115,9 +118,6 @@ export default function MySummaries(){
         </SummaryContextConsumer>
         
         :
-        //Auto-redirection to home page if user is not logged in
-        <>
         <Redirect to = '/'/>
-        </>
     );
 }
