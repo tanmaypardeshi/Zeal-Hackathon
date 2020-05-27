@@ -39,15 +39,17 @@
 ### Documentation about the files in the repository
 #### (Click on the links to open the folder)
 
-**1. [glove:]()** Embeddings used to perform text summarization and information retrieval for Real Time Research News.
+**1. [glove:](https://drive.google.com/drive/folders/19Os5gxvs6598urqkF3Wfobc_qBKGchd8)** Embeddings used to perform text summarization and information retrieval for Real Time Research News.
 
-**2. [ir_old.csv](https://drive.google.com/drive/folders/1xOUJYH9ycIBSHce-qXkEZLVMIoZLAktr)** Dataset created by using CORD-19 data for Information Retrieval
+**2. [ir_old.csv:](https://drive.google.com/drive/folders/1xOUJYH9ycIBSHce-qXkEZLVMIoZLAktr)** Dataset created by using CORD-19 data for Information Retrieval
 
-**3. [summariser.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/summariser.py)** Makes use of the TextRank algorithm to summarize the input Biomedical Text.
+**3. [data_script.ipynb:]()** The script written in order to extract data from the source data in the required format.
 
-**4. [ir_author.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/ir_author.py)** Makes use of levenshtein distance to generate a similarity score between the author based query and documents
+**4. [summariser.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/summariser.py)** Makes use of the TextRank algorithm to summarize the input Biomedical Text.
 
-**5. [ir_title.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/ir_title.py)** Makes use of levenshtein distance and keyword indexing to generate a similarity score between the title based query and documents
+**5. [ir_author.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/ir_author.py)** Makes use of levenshtein distance to generate a similarity score between the author based query and documents
+
+**6. [ir_title.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/ir_title.py)** Makes use of levenshtein distance and keyword indexing to generate a similarity score between the title based query and documents
 
 
 ### Research papers referred while working for the project:
@@ -81,28 +83,44 @@ extractive text summarization, a pretrained BERT model is used.
 
 ### Snippets of the platform:
 
-* ### Login and Signup
+* ### Home Page
+
 
 <p float="left">
-    <img src="screenshots/5.png" alt="5.png" width="700" height="400">
+    <img src="screenshots/1.png" alt="1.png" width="700" height="400">
+    <img src="screenshots/2.png" alt="2.png" width="700" height="400">
+</p>
+
+* ### Register and Login
+
+<p float="left">
     <img src="screenshots/6.png" alt="6.png" width="700" height="400">
+    <img src="screenshots/7.png" alt="7.png" width="700" height="400">
 </p>
 
 
 * ### Summarization and My Summaries
 
 <p float="left">
-    <img src="screenshots/10.png" alt="10.png" width="700" height="400">
-    <img src="screenshots/11.png" alt="11.png" width="700" height="400">
-    <img src="screenshots/16.png" alt="16.png" width="700" height="400">
-    <img src="screenshots/14.png" alt="14.png" width="700" height="400">
+    <img src="screenshots/3.png" alt="3.png" width="700" height="400">
+    <img src="screenshots/4.png" alt="4.png" width="700" height="400">
+    <img src="screenshots/5.png" alt="5.png" width="700" height="400">
+    <img src="screenshots/8.png" alt="8.png" width="700" height="400">
 </p>
 
-* ### Information Retrieval
+* ### Information Retrieval by author
 
 <p float="left">
-    <img src="screenshots/8.png" alt="8.png" width="700" height="400">
     <img src="screenshots/9.png" alt="9.png" width="700" height="400">
-    <img src="screenshots/7.png" alt="7.png" width="700" height="400">
-    <img src="screenshots/15.png" alt="15.png" width="700" height="400">
+    <img src="screenshots/10.png" alt="10.png" width="700" height="400">
+    
+</p>
+
+
+* ### Information Retrieval by title
+
+<p float="left">
+    <img src="screenshots/11.png" alt="11.png" width="700" height="400">
+    <img src="screenshots/12.png" alt="12.png" width="700" height="400">
+    
 </p>

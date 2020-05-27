@@ -110,7 +110,7 @@ def summarise():
     post_data = request.get_json()
     title = post_data['title']
     content = post_data['content']
-    new_content = content
+    new_content = create_summary(content)
     current_user = get_jwt_identity()
     try:
         summary = Summary(title=title, summary=new_content, user_email=current_user['email'])
