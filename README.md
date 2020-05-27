@@ -6,9 +6,9 @@
 
 #### [Click here to open the text file used in the video recording](https://github.com/tanmaypardeshi/Zeal-Hackathon/tree/master/data)
 
-#### [Click here to access the videos on GitHub]()
+#### [Click here to access the videos on GitHub](https://github.com/tanmaypardeshi/Zeal-Hackathon/tree/master/videos)
 
-#### [Click here to access the videos on Drive]()
+#### [Click here to access the videos on Drive](https://drive.google.com/drive/folders/170iWXJ1lRCcfl8u8WKkcMo3MbpgTuK6R)
 
 #### [Click here for the PPT for round 1](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/Team%20Clasp%20Zeal%20Hackathon%20PPT.pdf)
 
@@ -43,7 +43,7 @@
 
 **2. [ir_old.csv:](https://drive.google.com/drive/folders/1xOUJYH9ycIBSHce-qXkEZLVMIoZLAktr)** Dataset created by using CORD-19 data for Information Retrieval
 
-**3. [data_script.ipynb:]()** The script written in order to extract data from the source data in the required format.
+**3. [data_script.ipynb:](https://github.com/tanmaypardeshi/Zeal-Hackathon/tree/master/data)** The script written in order to extract data from the source data in the required format.
 
 **4. [summariser.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/summariser.py)** Makes use of the TextRank algorithm to summarize the input Biomedical Text.
 
