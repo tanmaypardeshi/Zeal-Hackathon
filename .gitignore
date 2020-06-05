@@ -1,6 +1,7 @@
 .idea
 .vscode
 data/*.csv
+data/*.joblib
 glove
 venv
 apis/__pycache__
