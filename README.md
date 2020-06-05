@@ -51,6 +51,15 @@
 
 **6. [ir_title.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/ir_title.py)** Makes use of levenshtein distance and keyword indexing to generate a similarity score between the title based query and documents
 
+**7. [news.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/news.py)** Makes use of scraping techniques to retrieve unstructured COVID-19 research news from the internet and makes use of info retrieval to display relevant results on the basis of a query.
+
+**8. [Q&A_CDQA_Finetuning.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/Q&A_CDQA_Finetuning.py)** The script written to fine-tune BERT with respect to a subset of CORD-19 dataset
+
+**9. [Anomaly_detection.py:](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/Anomaly_detection.py)** The script written to fine-tune BERT with respect to a subset of CORD-19 dataset
+
+**10. [qna.joblib](https://drive.google.com/drive/folders/1MAMWa5IZ9z2k_u2SpYXrVHLCoT5EMy3J)** Trained model which predicts answers on the basis of the question query
+
+
 
 ### Research papers referred while working for the project:
 #### (Click on the links to open the research paper)
@@ -80,7 +89,6 @@ extractive text summarization, a pretrained BERT model is used.
 
   This research paper explores to what extent high quality training data is actually required for Extractive QA, and investigates the possibility of unsupervised Extractive QA. This problem is approached by first learning to generate context, question and answer triplets in an unsupervised manner, which we then use to synthesize Extractive QA training data automatically.
   
-
 * [A review on anomaly detection in disease outbreak detection](https://www.researchgate.net/publication/281465876_A_review_on_anomaly_detection_in_disease_outbreak_detection)
 
    Gives a brief description about detection of pandemic like anomalies using AI
