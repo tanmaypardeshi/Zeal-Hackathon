@@ -8,7 +8,7 @@
 
 #### [Click here to access the videos on GitHub](https://github.com/tanmaypardeshi/Zeal-Hackathon/tree/master/videos)
 
-#### [Click here to access the videos on Drive](https://drive.google.com/drive/folders/170iWXJ1lRCcfl8u8WKkcMo3MbpgTuK6R)
+#### [Click here to access the videos on Drive](https://drive.google.com/drive/folders/1GxC_4_sMf3cYmMMczZmrUM8Hin7am_P0)
 
 #### [Click here for the PPT for round 1](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/Team%20Clasp%20Zeal%20Hackathon%20PPT.pdf)
 
