@@ -12,6 +12,8 @@
 
 #### [Click here for the PPT for round 1](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/Team%20Clasp%20Zeal%20Hackathon%20PPT.pdf)
 
+#### [Click here for the PPT for round 2](https://github.com/tanmaypardeshi/Zeal-Hackathon/blob/master/Zeal%20Hackathon%20Final%20Round.pdf)
+
 
 ### Steps to run the project:
 
