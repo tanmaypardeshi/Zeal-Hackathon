@@ -79,48 +79,71 @@ extractive text summarization, a pretrained BERT model is used.
 * [Unsupervised Question Answering by Cloze Translation](https://research.fb.com/wp-content/uploads/2019/07/Unsupervised-Question-Answering-by-Cloze-Translation.pdf)
 
   This research paper explores to what extent high quality training data is actually required for Extractive QA, and investigates the possibility of unsupervised Extractive QA. This problem is approached by first learning to generate context, question and answer triplets in an unsupervised manner, which we then use to synthesize Extractive QA training data automatically.
+  
+
+* [A review on anomaly detection in disease outbreak detection](https://www.researchgate.net/publication/281465876_A_review_on_anomaly_detection_in_disease_outbreak_detection)
+
+   Gives a brief description about detection of pandemic like anomalies using AI
+
+* [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
+
+  The paper explores the architecture of the current State Of The Art Language Representation Model - BERT
 
 
 ### Snippets of the platform:
 
-* ### Home Page
-
+* ### Welcome modal
 
 <p float="left">
     <img src="screenshots/1.png" alt="1.png" width="700" height="400">
     <img src="screenshots/2.png" alt="2.png" width="700" height="400">
 </p>
 
-* ### Register and Login
+* ### News
 
 <p float="left">
+    <img src="screenshots/3.png" alt="3.png" width="700" height="400">
+    <img src="screenshots/4.png" alt="4.png" width="700" height="400">
+</p>
+
+
+* ### Login and Signup
+
+<p float="left">
+    <img src="screenshots/5.png" alt="5.png" width="700" height="400">
     <img src="screenshots/6.png" alt="6.png" width="700" height="400">
-    <img src="screenshots/7.png" alt="7.png" width="700" height="400">
 </p>
 
 
 * ### Summarization and My Summaries
 
 <p float="left">
-    <img src="screenshots/3.png" alt="3.png" width="700" height="400">
-    <img src="screenshots/4.png" alt="4.png" width="700" height="400">
-    <img src="screenshots/5.png" alt="5.png" width="700" height="400">
-    <img src="screenshots/8.png" alt="8.png" width="700" height="400">
-</p>
-
-* ### Information Retrieval by author
-
-<p float="left">
-    <img src="screenshots/9.png" alt="9.png" width="700" height="400">
     <img src="screenshots/10.png" alt="10.png" width="700" height="400">
-    
+    <img src="screenshots/11.png" alt="11.png" width="700" height="400">
+    <img src="screenshots/16.png" alt="16.png" width="700" height="400">
+    <img src="screenshots/14.png" alt="14.png" width="700" height="400">
 </p>
 
-
-* ### Information Retrieval by title
+* ### Information Retrieval and My Bookmarks
 
 <p float="left">
-    <img src="screenshots/11.png" alt="11.png" width="700" height="400">
-    <img src="screenshots/12.png" alt="12.png" width="700" height="400">
-    
+    <img src="screenshots/8.png" alt="8.png" width="700" height="400">
+    <img src="screenshots/9.png" alt="9.png" width="700" height="400">
+    <img src="screenshots/7.png" alt="7.png" width="700" height="400">
+    <img src="screenshots/15.png" alt="15.png" width="700" height="400">
+</p>
+
+* ### Q & A and My Questions
+
+<p float="left">
+    <img src="screenshots/19.png" alt="19.png" width="700" height="400">
+    <img src="screenshots/20.png" alt="20.png" width="700" height="400">
+    <img src="screenshots/13.png" alt="13.png" width="700" height="400">
+</p>
+
+* ### Anomaly Detection Map
+
+<p float="left">
+    <img src="screenshots/17.png" alt="17.png" width="700" height="400">
+    <img src="screenshots/18.png" alt="18.png" width="700" height="400">
 </p>
